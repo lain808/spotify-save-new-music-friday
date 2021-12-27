@@ -9,7 +9,7 @@ load_dotenv(find_dotenv())
 REFRESH_TOKEN = os.environ.get("REFRESH_TOKEN").strip()
 CLIENT_ID = os.environ.get("CLIENT_ID").strip()
 CLIENT_SECRET = os.environ.get("CLIENT_SECRET").strip()
-DISCOVER_WEEKLY_ID = os.environ.get("DISCOVER_WEEKLY_ID").strip()
+NEW_MUSIC_FRIDAY_ID = os.environ.get("NEW_MUSIC_FRIDAY_ID").strip()
 USER_ID = os.environ.get("USER_ID")
 
 today = date.today()
@@ -32,7 +32,7 @@ def refresh_access_token():
 
 
 def get_playlist(access_token):
-    url = "https://api.spotify.com/v1/playlists/%s" % DISCOVER_WEEKLY_ID
+    url = "https://api.spotify.com/v1/playlists/%s" % NEW_MUSIC_FRIDAY_ID
     headers = {
        "Content-Type": "application/json",
        "Authorization": "Bearer %s" % access_token
@@ -67,7 +67,7 @@ def add_to_nmfi(access_token, nmfiplaylisttoday, tracklist):
 
 
 def main():
-    if REFRESH_TOKEN is None or CLIENT_ID is None or CLIENT_SECRET is None or DISCOVER_WEEKLY_ID is None:
+    if REFRESH_TOKEN is None or CLIENT_ID is None or CLIENT_SECRET is None or NEW_MUSIC_FRIDAY_ID is None:
         print("Environment variables have not been loaded!")
         return
 
