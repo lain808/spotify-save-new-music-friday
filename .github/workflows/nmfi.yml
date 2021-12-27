@@ -27,4 +27,4 @@ jobs:
           CLIENT_SECRET: ${{ secrets.CLIENT_SECRET }}
           REFRESH_TOKEN: ${{ secrets.REFRESH_TOKEN }}
           DISCOVER_WEEKLY_ID: ${{ secrets.DISCOVER_WEEKLY_ID }}
-          SAVE_TO_ID: ${{ secrets.SAVE_TO_ID }}
+          USER_ID: ${{ secrets.USER_ID }}
