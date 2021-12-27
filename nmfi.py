@@ -10,7 +10,7 @@ CLIENT_ID = os.environ.get("CLIENT_ID").strip()
 CLIENT_SECRET = os.environ.get("CLIENT_SECRET").strip()
 DISCOVER_WEEKLY_ID = os.environ.get("DISCOVER_WEEKLY_ID").strip()
 SAVE_TO_ID = os.environ.get("SAVE_TO_ID").strip()
-USER_ID = os.environ.get("USER_ID").strip()
+USER_ID = os.environ.get("USER_ID")
 
 TODAY = time.strftime('%d %m %Y')
 
