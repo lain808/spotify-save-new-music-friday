@@ -67,7 +67,7 @@ def add_to_nmfi(access_token, nmfiplaylisttoday, tracklist):
 
 
 def main():
-    if REFRESH_TOKEN is None or CLIENT_ID is None or CLIENT_SECRET is None or DISCOVER_WEEKLY_ID is None or SAVE_TO_ID is None:
+    if REFRESH_TOKEN is None or CLIENT_ID is None or CLIENT_SECRET is None or DISCOVER_WEEKLY_ID is None:
         print("Environment variables have not been loaded!")
         return
 
