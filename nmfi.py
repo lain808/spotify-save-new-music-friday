@@ -42,7 +42,7 @@ def get_playlist(access_token):
     return response.json()
 
 def create_playlist(access_token):
-    url = "ttps://api.spotify.com/v1/users/%s/playlists" % USER_ID
+    url = "https://api.spotify.com/v1/users/%s/playlists" % USER_ID
     payload = {
         "name": "New Music Friday Italia del %s" % d1,
         "description": "Ogni Venerdì, le migliori nuove uscite, copia salvata il %s" % d1
@@ -67,7 +67,7 @@ def add_to_playlist(access_token, tracklist):
     return response.json()
 
 def add_to_nmfi(access_token, nmfiplaylisttoday, tracklist):
-    url = "https://api.spotify.com/v1/playlists/nmfiplaylisttoday/tracks"
+    url = "https://api.spotify.com/v1/playlists/%s/tracks" % nmfiplaylisttoday
     payload = {
         "uris" : tracklist
     }
