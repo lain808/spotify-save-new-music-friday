@@ -10,7 +10,6 @@ REFRESH_TOKEN = os.environ.get("REFRESH_TOKEN").strip()
 CLIENT_ID = os.environ.get("CLIENT_ID").strip()
 CLIENT_SECRET = os.environ.get("CLIENT_SECRET").strip()
 DISCOVER_WEEKLY_ID = os.environ.get("DISCOVER_WEEKLY_ID").strip()
-SAVE_TO_ID = os.environ.get("SAVE_TO_ID").strip()
 USER_ID = os.environ.get("USER_ID")
 
 today = date.today()
@@ -54,18 +53,6 @@ def create_playlist(access_token):
     response = requests.post(url, data=json.dumps(payload), headers=headers)
     return response.json()
 
-def add_to_playlist(access_token, tracklist):
-    url = "https://api.spotify.com/v1/playlists/%s/tracks" % SAVE_TO_ID
-    payload = {
-        "uris" : tracklist
-    }
-    headers = {
-       "Content-Type": "application/json",
-       "Authorization": "Bearer %s" % access_token
-    }
-    response = requests.post(url, data=json.dumps(payload), headers=headers)
-    return response.json()
-
 def add_to_nmfi(access_token, nmfiplaylisttoday, tracklist):
     url = "https://api.spotify.com/v1/playlists/%s/tracks" % nmfiplaylisttoday
     payload = {
@@ -90,11 +77,10 @@ def main():
     tracklist = []
     for item in tracks:
         tracklist.append(item['track']['uri'])
-    #response = add_to_playlist(access_token, tracklist)
     response = add_to_nmfi(access_token, nmfiplaylisttoday, tracklist)
 
     if "snapshot_id" in response:
-        print("Successfully added all songs")
+        print("Playlist backup complete")
     else:
         print(response)
 
