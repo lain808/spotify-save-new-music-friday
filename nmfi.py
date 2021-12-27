@@ -45,8 +45,7 @@ def create_playlist(access_token):
     url = "ttps://api.spotify.com/v1/users/%s/playlists" % USER_ID
     payload = {
         "name": "New Music Friday Italia del %s" % d1,
-        "description": "Ogni Venerdì, le migliori nuove uscite, copia salvata il %s" % d1,
-        "public": true
+        "description": "Ogni Venerdì, le migliori nuove uscite, copia salvata il %s" % d1
     }
     headers = {
        "Content-Type": "application/json",
