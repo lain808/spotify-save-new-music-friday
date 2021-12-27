@@ -1,4 +1,5 @@
 from dotenv import load_dotenv, find_dotenv
+from datetime import date
 import requests
 import base64
 import json
@@ -12,7 +13,8 @@ DISCOVER_WEEKLY_ID = os.environ.get("DISCOVER_WEEKLY_ID").strip()
 SAVE_TO_ID = os.environ.get("SAVE_TO_ID").strip()
 USER_ID = os.environ.get("USER_ID")
 
-TODAY = time.strftime('%d %m %Y')
+today = date.today()
+d1 = today.strftime("%d/%m/%Y")
 
 OAUTH_TOKEN_URL = "https://accounts.spotify.com/api/token"
 def refresh_access_token():
@@ -42,7 +44,7 @@ def get_playlist(access_token):
 def create_playlist(access_token):
     url = "ttps://api.spotify.com/v1/users/%s/playlists" % USER_ID
     payload = {
-        "name": "New Music Friday Italia del %s" % TODAY,
+        "name": "New Music Friday Italia del %s" % d1,
         "description": "Ogni Venerdì, le migliori nuove uscite, copia salvata il %s" % TODAY,
         "public": true
     }
