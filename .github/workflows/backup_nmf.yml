@@ -2,7 +2,7 @@ name: Backup New Music Friday
 
 on:
   schedule:
-  - cron: '00 8 * * 5'
+  - cron: '00 7 * * 5'
   workflow_dispatch:
 
 jobs:
