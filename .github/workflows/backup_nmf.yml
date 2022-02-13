@@ -39,7 +39,7 @@ jobs:
           ACCESS_TOKEN_SECRET: ${{ secrets.TWITTER_ACCESS_TOKEN_SECRET }}
         with:
           status: |
-            Il backup della playlist New Music Friday Italia di oggi è ora disponibile! Inquadra il codice con l'applicazione Spotify per andare ad ascoltarla :-)
+            La #playlist New Music Friday Italia di oggi è ora disponibile! Inquadra il codice con l'applicazione #Spotify per andare ad ascoltarla :-) | #NewMusicFridayItalia #NewMusicFriday
           media_paths: |
             nmf_cover.png
             nmf_spoticode.png
