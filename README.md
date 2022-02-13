@@ -98,4 +98,5 @@ Pull requests are welcome. For major changes, please open an issue first to disc
 ## Credits
 https://github.com/spotify/web-api/issues/519#issuecomment-618114678  
 https://packaging.python.org/en/latest/guides/installing-using-pip-and-virtual-environments/  
-https://towardsdatascience.com/how-to-download-an-image-using-python-38a75cfa21c
+https://towardsdatascience.com/how-to-download-an-image-using-python-38a75cfa21c  
+https://stackoverflow.com/a/16129667

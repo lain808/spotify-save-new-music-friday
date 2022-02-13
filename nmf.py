@@ -66,6 +66,24 @@ def add_to_nmfi(access_token, nmfiplaylisttoday, tracklist):
     response = requests.post(url, data=json.dumps(payload), headers=headers)
     return response.json()
 
+def get_spoticode(nmfiplaylisttoday):
+    base_url = 'https://scannables.scdn.co/uri/plain/png/bdd74/black/640/spotify:playlist:'
+    spoti_url = ''.join([base_url, nmfiplaylisttoday])
+    print("Spotify Code:",spoti_url)
+    return spoti_url
+
+def get_playlistcover(access_token, nmfiplaylisttoday):
+    url = "https://api.spotify.com/v1/playlists/%s/images" % nmfiplaylisttoday
+    headers = {
+       "Content-Type": "application/json",
+       "Authorization": "Bearer %s" % access_token
+    }
+    response = requests.get(url, headers=headers)
+    return response.json()
+
+def downloadart(arturl, filename):
+    response = urllib.request.urlretrieve(arturl, filename)
+    return response
 
 def main():
     if REFRESH_TOKEN is None or CLIENT_ID is None or CLIENT_SECRET is None or NEW_MUSIC_FRIDAY_ID is None:
@@ -82,11 +100,10 @@ def main():
 
     if "snapshot_id" in response:
         print("Playlist backup complete")
-        base_url = 'https://scannables.scdn.co/uri/plain/png/bdd74/black/640/spotify:playlist:'
-        spoti_url = ''.join([base_url, nmfiplaylisttoday])
-        print("Spotify Code:",spoti_url)
-        filename = 'spoticode.png'
-        urllib.request.urlretrieve(spoti_url, filename)
+        nmf_spoticode = get_spoticode(nmfiplaylisttoday)
+        nmf_cover =  get_playlistcover(access_token, nmfiplaylisttoday)[0]['url']
+        downloadart(nmf_spoticode,"nmf_spoticode.png")
+        downloadart(nmf_cover,"nmf_cover.png")
     else:
         print(response)
 
