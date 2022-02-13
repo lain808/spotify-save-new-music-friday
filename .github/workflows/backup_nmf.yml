@@ -41,4 +41,5 @@ jobs:
           status: |
             Il backup della playlist New Music Friday Italia di oggi è ora disponibile! Inquadra il codice con l'applicazione Spotify per andare ad ascoltarla :-)
           media_paths: |
-            spoticode.png
+            nmf_cover.png
+            nmf_spoticode.png
