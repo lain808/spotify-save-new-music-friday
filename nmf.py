@@ -1,6 +1,7 @@
 from dotenv import load_dotenv, find_dotenv
 from datetime import date
 import requests
+import urllib.request
 import base64
 import json
 import os
@@ -81,6 +82,11 @@ def main():
 
     if "snapshot_id" in response:
         print("Playlist backup complete")
+        base_url = 'https://scannables.scdn.co/uri/plain/png/bdd74/black/640/spotify:playlist:'
+        spoti_url = ''.join([base_url, nmfiplaylisttoday])
+        print("Spotify Code:",spoti_url)
+        filename = 'spoticode.png'
+        urllib.request.urlretrieve(spoti_url, filename)
     else:
         print(response)
 
