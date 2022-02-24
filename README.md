@@ -82,7 +82,7 @@ Any execution errors can be found from within the actions tab of your forked rep
 If you want to create a brand new playlist, backup of actual New Music Friday, you have to choose "**Backup New Music Friday**" instead "**Append songs**".
 
 ## Local Execution
-Alternatively, you can store the **REFRESH_TOKEN**, **NEW_MUSIC_FRIDAY_ID** & **SAVE_TO_ID** back into your `.env` file and execute `main.py` or `nmf.py` on your machine when required, maybe manually or using a task schedular. Make sure to have the `.env` and `main.py` (or `nmf.py`) files in the same directory for this.
+Alternatively, you can store the **REFRESH_TOKEN**, **NEW_MUSIC_FRIDAY_ID** & **SAVE_TO_ID** back into your `.env` file and execute `main.py` or `nmf.py` on your machine when required, maybe manually or using a task scheduler. Make sure to have the `.env` and `main.py` (or `nmf.py`) files in the same directory for this.
 
  ```
 $python main.py
