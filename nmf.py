@@ -103,7 +103,7 @@ if check_env() == 1:
 access_token = refresh_access_token()['access_token']
 tracks =  get_playlist(access_token)['tracks']['items']
 
-if len(tracks) > 10:
+if len(tracks) > 1000:
     nmfiplaylisttoday =  create_playlist(access_token)['id']
     tracklist = []
     for item in tracks:
