@@ -5,6 +5,7 @@ import urllib.request
 import base64
 import json
 import os
+import sys
 
 load_dotenv(find_dotenv())
 REFRESH_TOKEN = os.environ.get("REFRESH_TOKEN").strip()
@@ -45,7 +46,7 @@ def create_playlist(access_token):
     url = "https://api.spotify.com/v1/users/%s/playlists" % USER_ID
     payload = {
         "name": "New Music Friday Italia del %s" % d1,
-        "description": "Ogni Venerdì, le migliori nuove uscite, copia salvata il %s" % d1
+        "description": "Ogni Venerdi, le migliori nuove uscite, copia salvata il %s" % d1
     }
     headers = {
        "Content-Type": "application/json",
@@ -85,14 +86,24 @@ def downloadart(arturl, filename):
     response = urllib.request.urlretrieve(arturl, filename)
     return response
 
-def main():
+def check_env():
     if REFRESH_TOKEN is None or CLIENT_ID is None or CLIENT_SECRET is None or NEW_MUSIC_FRIDAY_ID is None:
-        print("Environment variables have not been loaded!")
-        return
+        response = 1
+    else:
+        response = 0
+    return response
 
-    access_token = refresh_access_token()['access_token']
+def pause():
+    programPause = input("Press the <ENTER> key to continue...")
+
+if check_env() == 1:
+    sys.exit("Environment variables have not been loaded, abort.")
+
+access_token = refresh_access_token()['access_token']
+tracks =  get_playlist(access_token)['tracks']['items']
+
+if len(tracks) > 10:
     nmfiplaylisttoday =  create_playlist(access_token)['id']
-    tracks =  get_playlist(access_token)['tracks']['items']
     tracklist = []
     for item in tracks:
         tracklist.append(item['track']['uri'])
@@ -104,7 +115,6 @@ def main():
         nmf_cover =  get_playlistcover(access_token, nmfiplaylisttoday)[0]['url']
         downloadart(nmf_spoticode,"nmf_spoticode.png")
         downloadart(nmf_cover,"nmf_cover.png")
-    else:
-        print(response)
 
-main()
+else:
+    print("Check tracklist len")
