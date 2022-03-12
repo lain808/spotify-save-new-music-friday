@@ -9,7 +9,7 @@ jobs:
   execute-cron:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout Code	
+      - name: Checkout Code
         uses: actions/checkout@v2
 
       - name: Setup Python Environment
@@ -28,7 +28,7 @@ jobs:
           REFRESH_TOKEN: ${{ secrets.REFRESH_TOKEN }}
           NEW_MUSIC_FRIDAY_ID: ${{ secrets.NEW_MUSIC_FRIDAY_ID }}
           USER_ID: ${{ secrets.USER_ID }}
-      
+
       - name: Tweet NMF
         id: tweet
         uses: snow-actions/tweet@v1.1.1
@@ -43,7 +43,7 @@ jobs:
           media_paths: |
             nmf_cover.png
             nmf_spoticode.png
-            
+
   run-if-failed:
       runs-on: ubuntu-latest
       needs: [execute-cron]
@@ -52,7 +52,7 @@ jobs:
         - name: Sleep Action
           uses: juliangruber/sleep-action@v1.0.1
           with:
-            time: 10m
+            time: 1m
 
         - name: Checkout Code
           uses: actions/checkout@v2
@@ -73,7 +73,7 @@ jobs:
             REFRESH_TOKEN: ${{ secrets.REFRESH_TOKEN }}
             NEW_MUSIC_FRIDAY_ID: ${{ secrets.NEW_MUSIC_FRIDAY_ID }}
             USER_ID: ${{ secrets.USER_ID }}
-            
+
         - name: Tweet NMF
           id: tweet
           uses: snow-actions/tweet@v1.1.1
