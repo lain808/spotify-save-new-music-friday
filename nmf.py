@@ -97,7 +97,8 @@ def pause():
     programPause = input("Press the <ENTER> key to continue...")
 
 if check_env() == 1:
-    sys.exit("Environment variables have not been loaded, abort.")
+    print("Environment variables have not been loaded, abort.")
+    sys.exit(1)
 
 access_token = refresh_access_token()['access_token']
 tracks =  get_playlist(access_token)['tracks']['items']
@@ -118,3 +119,4 @@ if len(tracks) > 10:
 
 else:
     print("Check tracklist len")
+    sys.exit(1)
