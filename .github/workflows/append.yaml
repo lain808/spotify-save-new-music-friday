@@ -28,3 +28,33 @@ jobs:
           REFRESH_TOKEN: ${{ secrets.REFRESH_TOKEN }}
           NEW_MUSIC_FRIDAY_ID: ${{ secrets.NEW_MUSIC_FRIDAY_ID }}
           SAVE_TO_ID: ${{ secrets.SAVE_TO_ID }}
+
+  run-if-failed:
+      runs-on: ubuntu-latest
+      needs: [execute-cron]
+      if: always() && (needs.execute-cron.result == 'failure')
+      steps:
+        - name: Sleep Action
+          uses: juliangruber/sleep-action@v1.0.1
+          with:
+            time: 10m
+
+        - name: Checkout Code
+          uses: actions/checkout@v2
+
+        - name: Setup Python Environment
+          uses: actions/setup-python@v2
+          with:
+            python-version: 3.8
+
+        - name: Install Requirements
+          run: pip install -r requirements.txt
+
+        - name: Execute Python script
+          run: python main.py
+          env:
+            CLIENT_ID: ${{ secrets.CLIENT_ID }}
+            CLIENT_SECRET: ${{ secrets.CLIENT_SECRET }}
+            REFRESH_TOKEN: ${{ secrets.REFRESH_TOKEN }}
+            NEW_MUSIC_FRIDAY_ID: ${{ secrets.NEW_MUSIC_FRIDAY_ID }}
+            USER_ID: ${{ secrets.USER_ID }}
