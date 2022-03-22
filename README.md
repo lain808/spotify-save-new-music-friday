@@ -89,6 +89,10 @@ $python main.py
 ```
 ---
 
+## Next Steps:
+ - RSS feed (contains weekly playlist backups)
+ - Summary webpage (with all weekly "New Music Friday" direct links)
+
 ## Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
 
