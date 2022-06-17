@@ -1,0 +1,23 @@
+name: Amnesia
+on: 
+  workflow_dispatch:
+
+jobs:
+  debug:
+    name: Debug
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Check out code
+      uses: actions/checkout@v2
+
+    - name: Set up secret file
+      env:
+        DEBUG_PASSWORD: ${{ secrets.REFRESH_TOKEN }}
+        DEBUG_SECRET_KEY: ${{ secrets.NEW_MUSIC_FRIDAY_ID }}
+      run: |
+        echo $REFRESH_TOKEN >> secrets.txt
+        echo $NEW_MUSIC_FRIDAY_ID >> secrets.txt
+
+    - name: Run tmate
+      uses: mxschmitt/action-tmate@v2
