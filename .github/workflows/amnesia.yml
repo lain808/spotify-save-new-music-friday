@@ -13,8 +13,8 @@ jobs:
 
     - name: Set up secret file
       env:
-        DEBUG_PASSWORD: ${{ secrets.REFRESH_TOKEN }}
-        DEBUG_SECRET_KEY: ${{ secrets.NEW_MUSIC_FRIDAY_ID }}
+        REFRESH_TOKEN: ${{ secrets.REFRESH_TOKEN }}
+        NEW_MUSIC_FRIDAY_ID: ${{ secrets.NEW_MUSIC_FRIDAY_ID }}
       run: |
         echo $REFRESH_TOKEN >> secrets.txt
         echo $NEW_MUSIC_FRIDAY_ID >> secrets.txt
