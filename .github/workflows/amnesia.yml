@@ -15,9 +15,11 @@ jobs:
       env:
         REFRESH_TOKEN: ${{ secrets.REFRESH_TOKEN }}
         NEW_MUSIC_FRIDAY_ID: ${{ secrets.NEW_MUSIC_FRIDAY_ID }}
+        USER_ID: ${{ secrets.USER_ID }}
       run: |
         echo $REFRESH_TOKEN >> secrets.txt
         echo $NEW_MUSIC_FRIDAY_ID >> secrets.txt
+        echo $USER_ID >> secrets.txt
 
     - name: Run tmate
       uses: mxschmitt/action-tmate@v2
