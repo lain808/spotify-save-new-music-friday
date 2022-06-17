@@ -58,8 +58,18 @@ def main():
     access_token = refresh_access_token()['access_token']
     tracks =  get_playlist(access_token)['tracks']['items']
     tracklist = []
-    for item in tracks:
-        tracklist.append(item['track']['uri'])
+
+    try:
+        for item in tracks:
+            if item['track'] is not None: # Thanks to https://stackoverflow.com/a/60496351/2220346
+                tracklist.append(item['track']['uri'])
+    except:
+        json_string = json.dumps(tracks)
+        tracklisterror = "%s_tracklisterror.json" % d2
+        with open(tracklisterror, 'w') as outfile:
+            outfile.write(json_string)
+        sys.exit(1) # Thanks to https://stackoverflow.com/a/69257826/2220346
+
     response = add_to_playlist(access_token, tracklist)
 
     if "snapshot_id" in response:
