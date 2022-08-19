@@ -143,7 +143,7 @@ if len(tracks) > 10:
             os.makedirs("json")
         env_file = os.getenv('GITHUB_ENV')
         with open(env_file, "a") as myfile:
-            myfile.write("jsn=%s.json") % year
+            myfile.write("jsn="+year+".json")
         filename = os.path.join("json",year+".json") # Thanks to https://howtodoinjava.com/json/append-json-to-file/
         json_nmf = []
         with open(filename) as fp:
