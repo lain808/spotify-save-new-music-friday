@@ -141,7 +141,9 @@ if len(tracks) > 10:
 
         if not os.path.exists("json"):
             os.makedirs("json")
-        echo "jsn=$year.json" >> $GITHUB_ENV
+        env_file = os.getenv('GITHUB_ENV')
+        with open(env_file, "a") as myfile:
+            myfile.write("jsn=%s.json") % year
         filename = os.path.join("json",year+".json") # Thanks to https://howtodoinjava.com/json/append-json-to-file/
         json_nmf = []
         with open(filename) as fp:
