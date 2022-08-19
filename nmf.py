@@ -17,6 +17,7 @@ USER_ID = os.environ.get("USER_ID")
 today = date.today()
 d1 = today.strftime("%d/%m/%Y")
 d2 = today.strftime("%Y%m%d")
+year = today.strftime("%Y")
 
 OAUTH_TOKEN_URL = "https://accounts.spotify.com/api/token"
 def refresh_access_token():
@@ -34,8 +35,8 @@ def refresh_access_token():
     return response.json()
 
 
-def get_playlist(access_token):
-    url = "https://api.spotify.com/v1/playlists/%s" % NEW_MUSIC_FRIDAY_ID
+def get_playlist(access_token,playlistid):
+    url = "https://api.spotify.com/v1/playlists/%s" % playlistid
     headers = {
        "Content-Type": "application/json",
        "Authorization": "Bearer %s" % access_token
@@ -102,10 +103,11 @@ if check_env() == 1:
     sys.exit(1)
 
 access_token = refresh_access_token()['access_token']
-tracks =  get_playlist(access_token)['tracks']['items']
+tracks =  get_playlist(access_token,NEW_MUSIC_FRIDAY_ID)['tracks']['items']
 
 if len(tracks) > 10:
     nmfiplaylisttoday =  create_playlist(access_token)['id']
+    nmfiplaylisttoday_info =  get_playlist(access_token,nmfiplaylisttoday)
     tracklist = []
 
     try:
@@ -122,11 +124,34 @@ if len(tracks) > 10:
     response = add_to_nmfi(access_token, nmfiplaylisttoday, tracklist)
 
     if "snapshot_id" in response:
-        print("Playlist backup complete")
+        print("Playlist backup complete!")
         nmf_spoticode = get_spoticode(nmfiplaylisttoday)
         nmf_cover =  get_playlistcover(access_token, nmfiplaylisttoday)[0]['url']
         downloadart(nmf_spoticode,"nmf_spoticode.png")
         downloadart(nmf_cover,"nmf_cover.png")
+
+        print("Adding playlist to current JSON file ...")
+        print("{}: {}".format(nmfiplaylisttoday_info['name'], nmfiplaylisttoday_info['external_urls']['spotify']))
+        json_nmf_add = {
+        "title": nmfiplaylisttoday_info['name'],
+        "cover": nmf_cover,
+        "url": nmfiplaylisttoday_info['external_urls']['spotify'],
+        "spoticode": nmf_spoticode
+        }
+
+        if not os.path.exists("json"):
+            os.makedirs("json")
+        echo "jsn=$year.json" >> $GITHUB_ENV
+        filename = os.path.join("json",year+".json") # Thanks to https://howtodoinjava.com/json/append-json-to-file/
+        json_nmf = []
+        with open(filename) as fp:
+            json_nmf = json.load(fp)
+        json_nmf.append(json_nmf_add)
+        print(json_nmf)
+        with open(filename, 'w') as fp_updated:
+            json.dump(json_nmf, fp_updated,
+            indent=4,
+            separators=(',',': '))
 
 else:
     print("Check tracklist len")
