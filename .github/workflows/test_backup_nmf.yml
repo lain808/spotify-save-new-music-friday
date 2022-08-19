@@ -38,8 +38,8 @@ jobs:
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
-          git add json/$jsn
-          git commit -m "$jsn automatic update" -a
+          git add json/$env:jsn
+          git commit -m "$env:jsn automatic update" -a
       - name: Push updated JSON
         uses: ad-m/github-push-action@master
         with:
