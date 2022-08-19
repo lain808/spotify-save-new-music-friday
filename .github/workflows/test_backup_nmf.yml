@@ -1,0 +1,92 @@
+name: Backup New Music Friday TEST
+
+on:
+  schedule:
+  - cron: '00 8 * * 5'
+  workflow_dispatch:
+
+jobs:
+  execute-cron:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v2
+
+      - name: Setup Python Environment
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.8
+
+      - name: Install Requirements
+        run: pip install -r requirements.txt
+
+      - name: Execute Python script
+        run: python nmf.py
+        env:
+          CLIENT_ID: ${{ secrets.CLIENT_ID }}
+          CLIENT_SECRET: ${{ secrets.CLIENT_SECRET }}
+          REFRESH_TOKEN: ${{ secrets.REFRESH_TOKEN }}
+          NEW_MUSIC_FRIDAY_ID: ${{ secrets.NEW_MUSIC_FRIDAY_ID }}
+          USER_ID: ${{ secrets.USER_ID }}
+          
+      - uses: actions/checkout@master
+        with:
+          persist-credentials: false # otherwise, the token used is the GITHUB_TOKEN, instead of your personal token
+          fetch-depth: 0 # otherwise, you will failed to push refs to dest repo
+    
+      - name: Commit updated JSON
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add json/$jsn
+          git commit -m "$jsn automatic update" -a
+      - name: Push updated JSON
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+
+  run-if-failed:
+      runs-on: ubuntu-latest
+      needs: [execute-cron]
+      if: always() && (needs.execute-cron.result == 'failure')
+      steps:
+        - name: Sleep Action
+          uses: juliangruber/sleep-action@v1.0.1
+          with:
+            time: 10m
+
+        - name: Checkout Code
+          uses: actions/checkout@v2
+
+        - name: Setup Python Environment
+          uses: actions/setup-python@v2
+          with:
+            python-version: 3.8
+
+        - name: Install Requirements
+          run: pip install -r requirements.txt
+
+        - name: Execute Python script
+          run: python nmf.py
+          env:
+            CLIENT_ID: ${{ secrets.CLIENT_ID }}
+            CLIENT_SECRET: ${{ secrets.CLIENT_SECRET }}
+            REFRESH_TOKEN: ${{ secrets.REFRESH_TOKEN }}
+            NEW_MUSIC_FRIDAY_ID: ${{ secrets.NEW_MUSIC_FRIDAY_ID }}
+            USER_ID: ${{ secrets.USER_ID }}
+            
+        - uses: actions/checkout@master
+          with:
+            persist-credentials: false # otherwise, the token used is the GITHUB_TOKEN, instead of your personal token
+            fetch-depth: 0 # otherwise, you will failed to push refs to dest repo
+
+        - name: Commit updated JSON
+          run: |
+            git config --local user.email "action@github.com"
+            git config --local user.name "GitHub Action"
+            git add json/$jsn
+            git commit -m "$jsn automatic update" -a
+        - name: Push updated JSON
+          uses: ad-m/github-push-action@master
+          with:
+            github_token: ${{ secrets.GITHUB_TOKEN }}
