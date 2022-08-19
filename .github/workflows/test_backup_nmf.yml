@@ -1,4 +1,4 @@
-name: Backup New Music Friday
+name: Backup New Music Friday TEST
 
 on:
   schedule:
@@ -28,21 +28,22 @@ jobs:
           REFRESH_TOKEN: ${{ secrets.REFRESH_TOKEN }}
           NEW_MUSIC_FRIDAY_ID: ${{ secrets.NEW_MUSIC_FRIDAY_ID }}
           USER_ID: ${{ secrets.USER_ID }}
-
-      - name: Tweet NMF
-        id: tweet
-        uses: snow-actions/tweet@v1.1.1
-        env:
-          CONSUMER_API_KEY: ${{ secrets.TWITTER_CONSUMER_API_KEY }}
-          CONSUMER_API_SECRET_KEY: ${{ secrets.TWITTER_CONSUMER_API_SECRET_KEY }}
-          ACCESS_TOKEN: ${{ secrets.TWITTER_ACCESS_TOKEN }}
-          ACCESS_TOKEN_SECRET: ${{ secrets.TWITTER_ACCESS_TOKEN_SECRET }}
+          
+      - uses: actions/checkout@master
         with:
-          status: |
-            La #playlist New Music Friday Italia della settimana è ora disponibile! Inquadra il codice con l'applicazione #Spotify per ascoltarla :-) | #NewMusicFridayItalia #NewMusicFriday
-          media_paths: |
-            nmf_cover.png
-            nmf_spoticode.png
+          persist-credentials: false # otherwise, the token used is the GITHUB_TOKEN, instead of your personal token
+          fetch-depth: 0 # otherwise, you will failed to push refs to dest repo
+    
+      - name: Commit updated JSON
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add json/$jsn
+          git commit -m "$jsn automatic update" -a
+      - name: Push updated JSON
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.GHUB_TOKEN }}
 
   run-if-failed:
       runs-on: ubuntu-latest
@@ -73,18 +74,19 @@ jobs:
             REFRESH_TOKEN: ${{ secrets.REFRESH_TOKEN }}
             NEW_MUSIC_FRIDAY_ID: ${{ secrets.NEW_MUSIC_FRIDAY_ID }}
             USER_ID: ${{ secrets.USER_ID }}
-
-        - name: Tweet NMF
-          id: tweet
-          uses: snow-actions/tweet@v1.1.1
-          env:
-            CONSUMER_API_KEY: ${{ secrets.TWITTER_CONSUMER_API_KEY }}
-            CONSUMER_API_SECRET_KEY: ${{ secrets.TWITTER_CONSUMER_API_SECRET_KEY }}
-            ACCESS_TOKEN: ${{ secrets.TWITTER_ACCESS_TOKEN }}
-            ACCESS_TOKEN_SECRET: ${{ secrets.TWITTER_ACCESS_TOKEN_SECRET }}
+            
+        - uses: actions/checkout@master
           with:
-            status: |
-              La #playlist New Music Friday Italia della settimana è ora disponibile! Inquadra il codice con l'applicazione #Spotify per ascoltarla :-) | #NewMusicFridayItalia #NewMusicFriday
-            media_paths: |
-              nmf_cover.png
-              nmf_spoticode.png
+            persist-credentials: false # otherwise, the token used is the GITHUB_TOKEN, instead of your personal token
+            fetch-depth: 0 # otherwise, you will failed to push refs to dest repo
+
+        - name: Commit updated JSON
+          run: |
+            git config --local user.email "action@github.com"
+            git config --local user.name "GitHub Action"
+            git add json/$jsn
+            git commit -m "$jsn automatic update" -a
+        - name: Push updated JSON
+          uses: ad-m/github-push-action@master
+          with:
+            github_token: ${{ secrets.GHUB_TOKEN }}
