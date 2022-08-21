@@ -58,6 +58,3 @@ jobs:
             REFRESH_TOKEN: ${{ secrets.REFRESH_TOKEN }}
             NEW_MUSIC_FRIDAY_ID: ${{ secrets.NEW_MUSIC_FRIDAY_ID }}
             USER_ID: ${{ secrets.USER_ID }}
-
-        - name: Caffeinate Workflows
-            uses: alecbcs/caffeinate-workflows@v0.1.0
