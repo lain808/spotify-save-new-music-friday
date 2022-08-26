@@ -71,7 +71,7 @@
         "url": "https://open.spotify.com/playlist/4q2S7KSKaaiB7OTfh86hDc",
         "spoticode": "https://scannables.scdn.co/uri/plain/png/bdd74/black/640/spotify:playlist:https://open.spotify.com/playlist/4q2S7KSKaaiB7OTfh86hDc?si=59cb8496e1f34db6"
     },
-	{
+    {
         "title": "New Music Friday Italia del 25/03/2022",
         "cover": "https://mosaic.scdn.co/640/ab67616d0000b27323d372acb35cd612ca1f95e7ab67616d0000b2738717b3ce89ee66bfb1133700ab67616d0000b273a7e3846ccf24dc1d6a362f24ab67616d0000b273ebfc57591bb5bf59135d8be1",
         "url": "https://open.spotify.com/playlist/0cTPH78d0iIdBGYUEkNgDz",
@@ -202,5 +202,11 @@
         "cover": "https://mosaic.scdn.co/640/ab67616d0000b27366df41ffc432faf398c6a8f5ab67616d0000b27382b1779740b1d1b908289ae7ab67616d0000b273e81a67049ef32dd99e6c4509ab67616d0000b273f6c23cb08ef7cec88a57e248",
         "url": "https://open.spotify.com/playlist/5sWnWfkZ66akl3DhnyCJ6K",
         "spoticode": "https://scannables.scdn.co/uri/plain/png/bdd74/black/640/spotify:playlist:https://open.spotify.com/playlist/5sWnWfkZ66akl3DhnyCJ6K?si=1de66c8ec1a54c89"
+    },
+    {
+        "title": "New Music Friday Italia del 26/08/2022",
+        "cover": "https://mosaic.scdn.co/640/ab67616d0000b27336fd765df91eeebe44c30810ab67616d0000b273a1a6383070526cecb1842bd0ab67616d0000b273b1038aaf26f4c6daad614707ab67616d0000b273b9add8933d2141076f745f73",
+        "url": "https://open.spotify.com/playlist/4PpQ0YZWJqvEfa3vhAnPIr",
+        "spoticode": "https://scannables.scdn.co/uri/plain/png/bdd74/black/640/spotify:playlist:4PpQ0YZWJqvEfa3vhAnPIr"
     }
 ]
