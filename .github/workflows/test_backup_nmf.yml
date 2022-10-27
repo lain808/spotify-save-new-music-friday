@@ -38,4 +38,4 @@ jobs:
       - name: Push updated JSON
         uses: ad-m/github-push-action@master
         with:
-          github_token: ${{ secrets.GHUB_TOKEN }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
