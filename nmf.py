@@ -141,9 +141,6 @@ if len(tracks) > 10:
 
         if not os.path.exists("json"):
             os.makedirs("json")
-        if not os.path.exists("jsn="+year+".json"):
-            with open(os.path.join("json",year+".json"), 'w') as file:
-                pass
         env_file = os.getenv('GITHUB_ENV')
         with open(env_file, "a") as ghenv:
             ghenv.write("jsn="+year+".json")
