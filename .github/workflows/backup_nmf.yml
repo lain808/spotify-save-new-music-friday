@@ -10,10 +10,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Setup Python Environment
-        uses: actions/setup-python@v2
+        uses: actions/setup-python@v4
         with:
           python-version: 3.8
 
@@ -42,7 +42,7 @@ jobs:
 
       - name: Tweet NMF
         id: tweet
-        uses: snow-actions/tweet@v1.1.1
+        uses: snow-actions/tweet@v1.4.0
         env:
           CONSUMER_API_KEY: ${{ secrets.TWITTER_CONSUMER_API_KEY }}
           CONSUMER_API_SECRET_KEY: ${{ secrets.TWITTER_CONSUMER_API_SECRET_KEY }}
@@ -66,10 +66,10 @@ jobs:
             time: 10m
 
         - name: Checkout Code
-          uses: actions/checkout@v2
+          uses: actions/checkout@v3
 
         - name: Setup Python Environment
-          uses: actions/setup-python@v2
+          uses: actions/setup-python@v4
           with:
             python-version: 3.8
 
@@ -98,7 +98,7 @@ jobs:
 
         - name: Tweet NMF
           id: tweet
-          uses: snow-actions/tweet@v1.1.1
+          uses: snow-actions/tweet@v1.4.0
           env:
             CONSUMER_API_KEY: ${{ secrets.TWITTER_CONSUMER_API_KEY }}
             CONSUMER_API_SECRET_KEY: ${{ secrets.TWITTER_CONSUMER_API_SECRET_KEY }}
