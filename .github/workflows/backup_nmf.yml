@@ -10,10 +10,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Setup Python Environment
-        uses: actions/setup-python@v2
+        uses: actions/setup-python@v4
         with:
           python-version: 3.8
 
@@ -28,10 +28,21 @@ jobs:
           REFRESH_TOKEN: ${{ secrets.REFRESH_TOKEN }}
           NEW_MUSIC_FRIDAY_ID: ${{ secrets.NEW_MUSIC_FRIDAY_ID }}
           USER_ID: ${{ secrets.USER_ID }}
+          
+      - name: Commit updated JSON
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add json/${{ env.jsn }}
+          git commit -m "${{ env.jsn }} automatic update" -a
+      - name: Push updated JSON
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Tweet NMF
         id: tweet
-        uses: snow-actions/tweet@v1.1.1
+        uses: snow-actions/tweet@v1.4.0
         env:
           CONSUMER_API_KEY: ${{ secrets.TWITTER_CONSUMER_API_KEY }}
           CONSUMER_API_SECRET_KEY: ${{ secrets.TWITTER_CONSUMER_API_SECRET_KEY }}
@@ -39,7 +50,7 @@ jobs:
           ACCESS_TOKEN_SECRET: ${{ secrets.TWITTER_ACCESS_TOKEN_SECRET }}
         with:
           status: |
-            La #playlist New Music Friday Italia di oggi è ora disponibile! Inquadra il codice con l'applicazione #Spotify per andare ad ascoltarla :-) | #NewMusicFridayItalia #NewMusicFriday
+            La #playlist New Music Friday Italia della settimana è ora disponibile! Inquadra il codice con l'applicazione #Spotify per ascoltarla :-) | #NewMusicFridayItalia #NewMusicFriday
           media_paths: |
             nmf_cover.png
             nmf_spoticode.png
@@ -55,10 +66,10 @@ jobs:
             time: 10m
 
         - name: Checkout Code
-          uses: actions/checkout@v2
+          uses: actions/checkout@v3
 
         - name: Setup Python Environment
-          uses: actions/setup-python@v2
+          uses: actions/setup-python@v4
           with:
             python-version: 3.8
 
@@ -73,10 +84,21 @@ jobs:
             REFRESH_TOKEN: ${{ secrets.REFRESH_TOKEN }}
             NEW_MUSIC_FRIDAY_ID: ${{ secrets.NEW_MUSIC_FRIDAY_ID }}
             USER_ID: ${{ secrets.USER_ID }}
+            
+        - name: Commit updated JSON
+          run: |
+            git config --local user.email "action@github.com"
+            git config --local user.name "GitHub Action"
+            git add json/${{ env.jsn }}
+            git commit -m "${{ env.jsn }} automatic update" -a
+        - name: Push updated JSON
+          uses: ad-m/github-push-action@master
+          with:
+            github_token: ${{ secrets.GITHUB_TOKEN }}
 
         - name: Tweet NMF
           id: tweet
-          uses: snow-actions/tweet@v1.1.1
+          uses: snow-actions/tweet@v1.4.0
           env:
             CONSUMER_API_KEY: ${{ secrets.TWITTER_CONSUMER_API_KEY }}
             CONSUMER_API_SECRET_KEY: ${{ secrets.TWITTER_CONSUMER_API_SECRET_KEY }}
@@ -84,7 +106,7 @@ jobs:
             ACCESS_TOKEN_SECRET: ${{ secrets.TWITTER_ACCESS_TOKEN_SECRET }}
           with:
             status: |
-              La #playlist New Music Friday Italia di oggi è ora disponibile! Inquadra il codice con l'applicazione #Spotify per andare ad ascoltarla :-) | #NewMusicFridayItalia #NewMusicFriday
+              La #playlist New Music Friday Italia della settimana è ora disponibile! Inquadra il codice con l'applicazione #Spotify per ascoltarla :-) | #NewMusicFridayItalia #NewMusicFriday
             media_paths: |
               nmf_cover.png
               nmf_spoticode.png

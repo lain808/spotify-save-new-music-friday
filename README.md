@@ -45,7 +45,7 @@ Enter URL you was redirected to (after accepting authorization):
 > https://your.url/here?code=somecodehere
 
 Your refresh token is: somerefreshtokenhere
-```
+ ```
 
 ### (4) GitHub Actions
 1. Go to the settings of your forked repo and click on Secrets.
@@ -86,11 +86,11 @@ Alternatively, you can store the **REFRESH_TOKEN**, **NEW_MUSIC_FRIDAY_ID** & **
 
  ```
 $python main.py
-```
+ ```
 ---
 
 ## Next Steps:
- - RSS feed (contains weekly playlist backups)
+ - ~~RSS feed (contains weekly playlist backups)~~ [JSON now available](https://github.com/gioxx/spotify-save-new-music-friday/commit/438e160c38c0175a3795ec9f9b4d0f06b2e7d56c)!
  - Summary webpage (with all weekly "New Music Friday" direct links)
 
 ## Contributing
