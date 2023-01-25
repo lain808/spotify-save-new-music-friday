@@ -30,7 +30,7 @@ jobs:
           SAVE_TO_ID: ${{ secrets.SAVE_TO_ID }}
           
       - name: Keepalive Workflow
-        uses: gautamkrishnar/keepalive-workflow@1.0.9
+        uses: gautamkrishnar/keepalive-workflow@1.1.0
    
 
   run-if-failed:
